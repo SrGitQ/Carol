@@ -7,13 +7,8 @@ from cmdhandlers.sch import schedule
 from cmdhandlers.random import randall
 from cmdhandlers.random import rand
 from licenses import getTelegramToken
+from services.snowball import snowball
 
-
-def snowball(update, context):
-    chat_id = update.message.chat_id
-    text = update.message.text
-    if 'kha' in text.lower():
-        context.bot.send_sticker(chat_id, open("./snowball/6.webp", "rb"))
 
 
 if __name__ == "__main__":
