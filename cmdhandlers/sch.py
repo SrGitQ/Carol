@@ -3,7 +3,7 @@ import datetime
 #from notion import getNotionDatabase
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 def getTodayN():
-    return datetime.datetime.today().weekday()
+    return datetime.datetime.today().weekday()+1
 
 def orderSchedule(schedule):
     
@@ -84,8 +84,8 @@ def sch(update, context):
         schedule = sch_day_q(nro_day)
     else:
         nro_day = getTodayN()
-        schedule = sch_tdy_q()
-    text = days[nro_day] + '\n'
+        schedule = sch_day_q(nro_day)
+    text = days[nro_day-1] + '\n'
     text += '\n'.join(schedule)
 
     chat_id = update.message.chat_id
