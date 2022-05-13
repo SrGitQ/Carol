@@ -3,7 +3,7 @@ import datetime
 #from notion import getNotionDatabase
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 def getTodayN():
-    return datetime.datetime.today().weekday()+1
+    return datetime.datetime.today().weekday()
 
 def orderSchedule(schedule):
     
