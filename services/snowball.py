@@ -75,8 +75,11 @@ def getStickerContextId(text):
     if len(options) > 1:
         i = randint(0, (len(options)-1))
         return options[i]
+        options.clear()
+
     elif len(options) == 1:
         return key
+        options.clear()
 
     return 'NO'
 
