@@ -73,11 +73,11 @@ def getStickerContextId(text):
             if word in text.lower():
                 options.append(key)
     if len(options) > 1:
-        i = randint(0, len(options))
+        i = randint(0, (len(options)-1))
         return options[i]
     elif len(options) == 1:
         return key
-        
+
     return 'NO'
 
 
