@@ -1,3 +1,6 @@
+from random import randint
+
+
 data = {
     '0':['wow','woow','wooow'],
     '1':['okidoki', 'okay', 'Okidoki', 'Okay', 'Ok', 'ok'],
@@ -63,11 +66,18 @@ def snowball(update, context):
 
 def getStickerContextId(text):
     keys = data.keys()
+    options = []
     for key in keys:
         words = data[key]
         for word in words:
             if word in text.lower():
-                return key
+                options.append(key)
+    if len(options) > 1:
+        i = randint(0, len(options))
+        return options[i]
+    elif len(options) == 1:
+        return key
+        
     return 'NO'
 
 
