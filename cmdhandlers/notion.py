@@ -168,31 +168,3 @@ class Deadline:
         self.time_zone = prop['time_zone']
     def __str__(self):
         return f'{self.start}-{self.end}'
-
-
-
-
-
-
-
-
-
-#from licenses import getSchDB, getNotionHeaders
-
-#database = NotionDatabase(getSchDB(), getNotionHeaders())
-
-#print(database.getRows())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
