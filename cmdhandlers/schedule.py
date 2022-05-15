@@ -1,4 +1,4 @@
-from notion import NotionDatabase
+from cmdhandlers.notion import NotionDatabase
 from licenses import getSchDB, getNotionHeaders
 import datetime
 
@@ -44,7 +44,7 @@ def getSchedule(day:int=today()):
 def sch(update, context):
     chat_id = update.message.chat_id
     try:
-        opt = message.split(sep=" ")[1]
+        opt = update.message.text.split(sep=" ")[1]
         if opt == 't':
             sch, day = getSchedule(today(1)), today(1)
         elif opt == 'y':
