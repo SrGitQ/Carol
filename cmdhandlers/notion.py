@@ -9,12 +9,9 @@ from licenses import getSchDB, getNotionHeaders
 #   select
 #   deadline
 
-def getNotionDatabase():
-    readUrl = f"https://api.notion.com/v1/databases/{getSchDB()}/query"
-
-    res = requests.post(readUrl, headers=getNotionHeaders())
-    data = res.json()
-    return data['results']
+def saveJson(data):
+    with open('./db.json', 'w', encoding='utf8') as f:
+        json.dump(data, f, ensure_ascii=False)
 
 # DATABASE
 class NotionDatabase:
@@ -23,11 +20,12 @@ class NotionDatabase:
     it needs headers with the toke to access.
     '''
     def __init__(self, dbId:str, headers:str):
-        readUrl = f"https://api.notion.com/v1/databases/{getSchDB()}/query"
+        readUrl = f"https://api.notion.com/v1/databases/{dbId}/query"
         res = requests.post(readUrl, headers=headers)
         self.cData = res.json()
         self.results = self.cData['results']
         self.objects = self.cData['object']
+        saveJson(self.results)
         self.rows = self.__getRows(self.results)
     
     def __getRows(self, results):

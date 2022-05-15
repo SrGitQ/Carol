@@ -131,3 +131,6 @@ licenses.py
 get-pip.py
 tester/
 __pycache__/
+
+db.json
+.DS_Store
