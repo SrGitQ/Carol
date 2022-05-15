@@ -1,14 +1,10 @@
-import logging
-from telegram import Update
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 from cmdhandlers.bop import bop
-from cmdhandlers.sch import sch
-from cmdhandlers.sch import schedule
-from cmdhandlers.random import randall
-from cmdhandlers.random import rand
+from cmdhandlers.schedule import sch, schedule
+from cmdhandlers.random import randall, rand
 from licenses import getTelegramToken
 from services.snowball import snowball
-
+from cmdhandlers.today import today
 
 
 if __name__ == "__main__":
@@ -24,7 +20,7 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler('schedule', schedule))
     dp.add_handler(CommandHandler('randall', randall))
     dp.add_handler(CommandHandler('rand', rand))
-    #dp.add_handler(CommandHandler('snball', snowball))
+    dp.add_handler(CommandHandler('today', today))
     dp.add_handler(MessageHandler(Filters.text, snowball))
     updater.start_polling()
     updater.idle()

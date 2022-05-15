@@ -33,10 +33,12 @@ class NotionDatabase:
     def __getRows(self, results):
         rows = []
         for result in results:
-            rows.append(NotionDBRow(result))
+            row = NotionDBRow(result)
+            
+            rows.append(row)
         return rows
 
-    def getRows(self):
+    def printRows(self):
         for row in self.rows:
             print(row)
 
@@ -74,9 +76,11 @@ class NotionDBRow:
         return self.columns[prop]
     
     def __str__(self):
-        text = ''
-        for col in self.columns:
-            text += col.__str__() + ' '
+        text =''
+        for col in self.columns.keys():
+            coltext = self.columns[col].__str__()
+            # print(coltext)
+            text += coltext + ' '
         return f'{text}\n '
 
 class Prop:
@@ -84,9 +88,10 @@ class Prop:
         self.name = name
         self.idV = idV
         self.typeV = typeV
-        self.propData = self.__propParser(typeV,propData)
+        self.propData = self.propParser(typeV,propData)
+        self.value = self.propData.__str__()
     
-    def __propParser(self, typeV, propData):
+    def propParser(self, typeV, propData):
         if typeV == 'title':
             return Title(propData)
         elif typeV == 'formula':
@@ -100,21 +105,26 @@ class Prop:
         else:
             return []
 
-    def __str__(self):
-        return f'{self.typeV}'
+    def __repr__(self):
+        return self.propData.__str__()
 
 class Rich_text:
     def __init__(self, prop):
         try:
             prop = prop[0]
-        
             self.type = prop['type']
             self.text = Text(prop['text'])
             self.annotations = Annotations(prop['annotations'])
             self.plain_text = prop['plain_text']
             self.href = prop['href']
         except:
-            self.prop = prop
+            self.type = ''
+            self.text = ''
+            self.annotations = ''
+            self.plain_text = ''
+            self.href = ''
+    def __str__(self):
+        return f'{self.text}'
 
 class Title(Rich_text):
     def __init__(self, prop):
@@ -124,11 +134,15 @@ class Formula:
     def __init__(self, prop):
         self.type = prop['type']
         self.number = prop[self.type]
+    def __str__(self):
+        return f'{self.number}'
 
 class Text:
     def __init__(self, text):
         self.content = text['content']
         self.link = text['link']
+    def __str__(self):
+        return f'{self.content}'
 
 class Annotations:
     def __init__(self, annotations):
@@ -136,22 +150,24 @@ class Annotations:
         self.italic = annotations['italic']
         self.strikethrough = annotations['strikethrough']
         self.underline = annotations['underline']
-        self.code = annotation['code']
-        self.color = annotation['color']
-
+        self.code = annotations['code']
+        self.color = annotations['color']
 
 class Select:
     def __init__(self, prop):
         self.id = prop['id']
         self.name = prop['name']
         self.color = prop['color']
+    def __str__(self):
+        return f'{self.name}'
 
 class Deadline:
     def __init__(self, prop):
         self.start = prop['start']
         self.end = prop['end']
         self.time_zone = prop['time_zone']
-
+    def __str__(self):
+        return f'{self.start}-{self.end}'
 
 
 
