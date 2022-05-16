@@ -13,7 +13,7 @@ def getHomeworks():
         deadline = row.columns['Deadline'].value.split(sep="=")[0][5:10]
         subject = row.columns['Subject'].value
         text = f'#{id_hm} {name}\n{subject} {deadline} {status}'
-        if status.value != 'Sent':
+        if status.value.lower() != 'sent':
             print(status)
             homeworks.append(text)
     text = '\n\n'.join(homeworks)
@@ -30,8 +30,8 @@ def changeStatus(id_hm, status):
     if homework == '':
         return
     status_ = ['Not', 'In', 'Almost', 'Sent']
-
-    if status.capitalize() not in status_:
+    status = status.capitalize()
+    if status not in status_:
         return
     id_ = homework.rowData['id'].replace('-','')
     updateUrl = f'https://api.notion.com/v1/pages/{id_}'
@@ -74,6 +74,7 @@ def hmst(update, context):
         id_hm = text[1]
         status = text[2]
         changeStatus(id_hm, status)
+        context.bot.send_message(chat_id, f'Homework {id_hm}\n{status}')
     except:
         context.bot.send_message(chat_id,'That homework is not created yet')
 
