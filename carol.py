@@ -5,7 +5,7 @@ from cmdhandlers.random import randall, rand
 from licenses import getTelegramToken
 from services.snowball import snowball
 from cmdhandlers.today import today
-
+from cmdhandlers.homework import hm, hmst
 
 if __name__ == "__main__":
     updater = Updater(getTelegramToken(), use_context=True)
@@ -21,6 +21,8 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler('randall', randall))
     dp.add_handler(CommandHandler('rand', rand))
     dp.add_handler(CommandHandler('today', today))
+    dp.add_handler(CommandHandler('hm', hm))
+    dp.add_handler(CommandHandler('hmst', hmst))
     dp.add_handler(MessageHandler(Filters.text, snowball))
     updater.start_polling()
     updater.idle()

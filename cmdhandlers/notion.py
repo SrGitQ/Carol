@@ -25,7 +25,7 @@ class NotionDatabase:
         self.cData = res.json()
         self.results = self.cData['results']
         self.objects = self.cData['object']
-        saveJson(self.results)
+        #saveJson(self.results)
         self.rows = self.__getRows(self.results)
     
     def __getRows(self, results):
@@ -98,7 +98,7 @@ class Prop:
             return Rich_text(propData)
         elif typeV == 'select':
             return Select(propData)
-        elif typeV == 'deadline':
+        elif typeV == 'date':
             return Deadline(propData)
         else:
             return []
@@ -165,4 +165,4 @@ class Deadline:
         self.end = prop['end']
         self.time_zone = prop['time_zone']
     def __str__(self):
-        return f'{self.start}-{self.end}'
+        return f'{self.start}={self.end}'
