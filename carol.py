@@ -14,7 +14,7 @@ if __name__ == "__main__":
     updater = Updater(getTelegramToken(), use_context=True)
     dp = updater.dispatcher
     routine = updater.job_queue
-    routine.run_daily(today, days=(0, 1, 2, 3, 4, 5, 6), time=datetime.time(hour=11, minute=43, second=00))
+    routine.run_daily(today, days=(0, 1, 2, 3, 4, 5, 6), time=datetime.time(hour=12, minute=43, second=00))
     '''
     commands 
     dp.add_handler(CommandHandler('command', bop))
