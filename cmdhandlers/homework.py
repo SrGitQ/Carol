@@ -66,6 +66,7 @@ def hm(update, context):
         context.bot.send_message(chat_id, getHomeworkInfo(id_hm))
     except:
         context.bot.send_message(chat_id, getHomeworks())
+    #context.bot.send_message(chat_id, f'your chat_id is: {chat_id}')
 
 def hmst(update, context):
     chat_id = update.message.chat_id

@@ -47,16 +47,21 @@ def sch(update, context):
         opt = update.message.text.split(sep=" ")[1]
         if opt == 't':
             sch, day = getSchedule(today(1)), today(1)
+            peer = f'1:t {day}'
         elif opt == 'y':
             sch, day = getSchedule(today(-1)), today(-1)
+            peer = f'2:y {day}'
         elif opt in ['1', '2', '3', '4', '5']:
             sch, day = getSchedule(int(opt)-1), int(opt)-1
+            peer = f'3:{opt} {day}'
     except:
         sch, day = getSchedule(), today()
+        peer = f'4:today {day}'
     if len(sch) > 0:
         context.bot.send_message(chat_id, nameDay(day)+'\n'+sch)
     else:
         context.bot.send_message(chat_id, f'\nNo school on {nameDay(day)} ;D')
+    print('get sch from: ',peer)
 
 def schedule(update, context):
     text = 'Schedule\n\n' + '\n\n'.join([f'{nameDay(i)}\n{getSchedule(i)}' for i in range(0,5)])
