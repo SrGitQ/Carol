@@ -41,8 +41,11 @@ def getSchedule(day:int=today()):
             schedule.append([name, stdSchTime(hours)])
     return '\n'.join(orderSchedule(schedule))
 
-def sch(update, context):
-    chat_id = update.message.chat_id
+def sch(update=0, context=0):
+    if update == 0 and context == 0:
+        return '\n'+getSchedule()
+    else:
+        chat_id = update.message.chat_id
     try:
         opt = update.message.text.split(sep=" ")[1]
         if opt == 't':
